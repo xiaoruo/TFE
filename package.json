@@ -1,0 +1,25 @@
+{
+  "name": "TFE",
+  "version": "0.0.1",
+  "description": "A Template front end create software",
+  "preferGlobal": "true",
+  "mian": "index.js",
+  "bin": {
+    "tfe": "index.js"
+  },
+  "author": "xiaoRuo",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "commander": "*",
+    "fs": "*",
+    "colors": "*",
+    "eslint": "~1.10.3",
+    "inquirer": "^0.12.0"
+  },
+  "devDependencies": {
+    "eslint-config-google": "^0.4.0",
+    "eslint-plugin-react": "^4.2.3"
+  }
+}
