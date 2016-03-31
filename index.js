@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 var fs = require('fs');
+var path = require('path');
+var filecopy = require('./lib/filecopy');
 var program = require('commander');
 var inquirer = require('inquirer');
 require('colors');
@@ -14,11 +16,20 @@ program
   .description('初始化项目')
   .action(function() {
     inquirer.prompt([{
-      type: 'list',
-      name: 'store',
+      type: 'confirm',
+      name: 'jQuery',
       message: '是否需要引入jQuery库?',
-      default: 'jQuery',
-      choices: [],
+      default: 'Yes'
+    }, {
+      type: 'confirm',
+      name: 'bootStrap',
+      message: '是否使用Bootstrap框架?',
+      default: 'Yes'
+    }, {
+      type: 'confirm',
+      name: 'font',
+      message: '是否需要引入webfont?',
+      default: 'No'
     }, {
       type: 'list',
       name: 'style',
@@ -33,12 +44,35 @@ program
       }, {
         name: 'sass',
         value: 'sass'
-      }, {
-
-      }],
-
+      }]
     }], function(answers) {
-      console.log(answers);
+      console.log(filecopy);
+      // exists('./src', './build', copy);
+      /*var fileName = "index.js";
+      var sourceFile = path.join(__dirname, fileName);
+      var destPath = path.join(__dirname, "dest", fileName);
+      var readStream = fs.createReadStream(sourceFile);
+      var writeStream = fs.createWriteStream(destPath);
+      console.log(sourceFile);
+      console.log(destPath);*/
+      if (answers.jQuery === true) {
+
+      }
+      if (answers.bootStrap === true) {
+
+      }
+      if (answers.font === true) {
+
+      }
+      if (answers.style === 'css') {
+
+      } else if (answers.style === 'less') {
+
+      } else if (answers.style === 'sass') {
+
+      } else {
+        console.log('样式设置error'.red);
+      }
     });
   });
 
