@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 var path = require('path');
-var filecopy = require('./lib/filecopy');
+var Filecopy = require('./lib/filecopy');
 var program = require('commander');
 var inquirer = require('inquirer');
 require('colors');
@@ -46,7 +46,11 @@ program
         value: 'sass'
       }]
     }], function(answers) {
-      console.log(filecopy);
+      // 1.
+      var nowPath = process.cwd();
+      var filePath = __dirname;
+      console.log(filePath);
+      new Filecopy(filePath + '/mod', nowPath);
       // exists('./src', './build', copy);
       /*var fileName = "index.js";
       var sourceFile = path.join(__dirname, fileName);
@@ -107,7 +111,8 @@ program
         eslintCli.execute(filesList[i]);
       }
     } else if (env === 'format') {
-      console.log(format.getFormatter());
+     format.getFormatter();
+     console.log('代码格式化完成!'.green);
     }
   });
 
