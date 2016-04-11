@@ -49,16 +49,8 @@ program
       // 1.
       var nowPath = process.cwd();
       var filePath = __dirname;
-      console.log(filePath);
       new Filecopy(filePath + '/mod', nowPath);
-      // exists('./src', './build', copy);
-      /*var fileName = "index.js";
-      var sourceFile = path.join(__dirname, fileName);
-      var destPath = path.join(__dirname, "dest", fileName);
-      var readStream = fs.createReadStream(sourceFile);
-      var writeStream = fs.createWriteStream(destPath);
-      console.log(sourceFile);
-      console.log(destPath);*/
+      console.log('项目初始化成功'.green);
       if (answers.jQuery === true) {
 
       }
@@ -84,12 +76,43 @@ program
   .command('add [env1] [env2]')
   .description('创建模块')
   .action(function(env1, env2) {
-    if (env1 === 'p') {
-      console.log('创建"%s"模块', env2);
-      console.log('"%s"模块创建成功'.green, env2);
+      if (env1 === 'p') {
+        var nowPath = process.cwd();
+        var filePath = __dirname;
+        new Filecopy(filePath + '/mod/p', nowPath + '/p');
+        var addP = setInterval(function() {
+          fs.exists(filePath + '/mod/p/demos', function(exists) {
+            if (exists) {
+              fs.rename(nowPath + '/p/demos', nowPath + '/p/' + env2, function(err) {
+                if (err) {
+                  console.log("文件创建中......".green);
+                } else {
+                  clearInterval(addP);
+                  console.log('"%s"模块创建成功'.green, env2);
+                }
+              });
+            }
+          });
+        }, 10);
     } else if (env1 === 'c') {
-      console.log('创建c模块');
-      console.log('"%s"模块创建成功'.green, env2);
+      var nowPath = process.cwd();
+      var filePath = __dirname;
+      new Filecopy(filePath + '/mod/c', nowPath + '/c');
+
+      var addC = setInterval(function() {
+        fs.exists(filePath + '/mod/c/module-demos', function(exists) {
+          if (exists) {
+            fs.rename(nowPath + '/c/module-demos', nowPath + '/c/' + env2, function(err) {
+              if (err) {
+                console.log("文件创建中......".green);
+              } else {
+                clearInterval(addC);
+                console.log('"%s"模块创建成功'.green, env2);
+              }
+            });
+          }
+        });
+      }, 10);
     } else {
       console.log('命令行参数不正确'.red);
     }
@@ -111,8 +134,8 @@ program
         eslintCli.execute(filesList[i]);
       }
     } else if (env === 'format') {
-     format.getFormatter();
-     console.log('代码格式化完成!'.green);
+      format.getFormatter();
+      console.log('代码格式化完成!'.green);
     }
   });
 
@@ -154,17 +177,3 @@ function readAllFile(root, reg) {
 
   return resultArr;
 }
-/*
-walk('/dirName');
-// eslintCli.execute(results);
-console.log(fileList); */
-/*
-Option(): 初始化自定义参数对象，设置“关键字”和“描述”
-Command(): 初始化命令行参数对象，直接获得命令行输入
-Command#command(): 定义一个命令名字
-Command#action(): 注册一个callback函数
-Command#option(): 定义参数，需要设置“关键字”和“描述”，关键字包括“简写”和“全写”两部分，以”,”,”|”,”空格”做分隔。
-Command#parse(): 解析命令行参数argv
-Command#description(): 设置description值
-Command#usage(): 设置usage值
- */

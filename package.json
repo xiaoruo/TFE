@@ -1,6 +1,6 @@
 {
-  "name": "TFE",
-  "version": "0.0.1",
+  "name": "tfe",
+  "version": "0.1.0",
   "description": "A Template front end create software",
   "preferGlobal": "true",
   "mian": "index.js",
@@ -19,11 +19,11 @@
   },
   "devDependencies": {
     "eslint-config-google": "^0.4.0",
-    "eslint-plugin-react": "^4.2.3"
+    "eslint-plugin-react": "^4.3.0"
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
   "repository": {
     "type": "git",
