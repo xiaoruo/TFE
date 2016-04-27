@@ -3,13 +3,13 @@
 var fs = require('fs');
 var path = require('path');
 var Filecopy = require('./lib/filecopy');
+var Http = require('./lib/http');
 var program = require('commander');
 var inquirer = require('inquirer');
 require('colors');
 var format = require('eslint/lib/cli-engine');
 var init = require('eslint/lib/config/config-initializer');
 var eslintCli = require('eslint/lib/cli');
-
 
 program
   .command('init')
@@ -126,7 +126,6 @@ program
       fs.exists('.eslintrc.js', function(exists) {
         if (exists === false) {
           init.initializeConfig();
-          console.log('代码检查模块初始化完成！'.green);
         }
       });
       var filesList = readAllFile(process.cwd());
@@ -143,7 +142,7 @@ program
   .command('dev')
   .description('开启服务器')
   .action(function(env) {
-
+      new Http();
   });
 
 program.parse(process.argv);
