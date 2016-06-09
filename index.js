@@ -19,17 +19,17 @@ program
       type: 'confirm',
       name: 'jQuery',
       message: '是否需要引入jQuery库?',
-      default: 'Yes'
+      default: true
     }, {
       type: 'confirm',
       name: 'bootStrap',
       message: '是否使用Bootstrap框架?',
-      default: 'Yes'
+      default: true
     }, {
       type: 'confirm',
       name: 'font',
       message: '是否需要引入webfont?',
-      default: 'No'
+      default: false
     }, {
       type: 'list',
       name: 'style',
@@ -51,24 +51,59 @@ program
       var filePath = __dirname;
       new Filecopy(filePath + '/mod', nowPath);
       console.log('项目初始化成功'.green);
-      if (answers.jQuery === true) {
-
-      }
-      if (answers.bootStrap === true) {
-
-      }
-      if (answers.font === true) {
-
-      }
-      if (answers.style === 'css') {
-
-      } else if (answers.style === 'less') {
-
-      } else if (answers.style === 'sass') {
-
-      } else {
-        console.log('样式设置error'.red);
-      }
+      var nowPath = process.cwd();
+      var filePath = __dirname;
+      var addP = setInterval(function() {
+        fs.exists(filePath + '/mod/p/demos', function(exists) {
+          if (exists) {
+            fs.rename(nowPath + '/p/demos', nowPath + '/p/demo', function(err) {
+              if (err) {} else {
+                clearInterval(addP);
+              }
+            });
+          }
+        });
+      }, 10);
+      var addC = setInterval(function() {
+        fs.exists(filePath + '/mod/c/module-demos', function(exists) {
+          if (exists) {
+            fs.rename(nowPath + '/c/module-demos', nowPath + '/c/module-demo', function(err) {
+              if (err) {} else {
+                clearInterval(addC);
+              }
+            });
+          }
+        });
+      }, 10);
+      var config = nowPath + '/config.json';
+      var addN = setInterval(function() {
+        fs.writeFile(config, JSON.stringify(answers), function(err) {
+          if (err) {
+            console.log("fail " + err);
+          } else {
+            clearInterval(addN);
+          }
+        });
+      }, 10);
+      var deleteN = setTimeout(function() {
+        var html = nowPath + '/page/index.html';
+        if (answers.style === 'css') {
+          fs.unlink(nowPath + '/c/module-demo/index.less');
+          fs.unlink(nowPath + '/c/module-demo/index.sass');
+          fs.unlink(nowPath + '/p/demo/index.less');
+          fs.unlink(nowPath + '/p/demo/index.sass');
+        } else if (answers.style === 'less') {
+          // fs.unlink(nowPath + '/c/module-demo/index.css');
+          fs.unlink(nowPath + '/c/module-demo/index.sass');
+          // fs.unlink(nowPath + '/p/demo/index.css');
+          fs.unlink(nowPath + '/p/demo/index.sass');
+        } else {
+          fs.unlink(nowPath + '/c/module-demo/index.less');
+          // fs.unlink(nowPath + '/c/module-demo/index.css');
+          fs.unlink(nowPath + '/p/demo/index.less');
+          // fs.unlink(nowPath + '/p/demo/index.css');
+        }
+      }, 100);
     });
   });
 
@@ -76,24 +111,38 @@ program
   .command('add [env1] [env2]')
   .description('创建模块')
   .action(function(env1, env2) {
-      if (env1 === 'p') {
-        var nowPath = process.cwd();
-        var filePath = __dirname;
-        new Filecopy(filePath + '/mod/p', nowPath + '/p');
-        var addP = setInterval(function() {
-          fs.exists(filePath + '/mod/p/demos', function(exists) {
-            if (exists) {
-              fs.rename(nowPath + '/p/demos', nowPath + '/p/' + env2, function(err) {
-                if (err) {
-                  console.log("文件创建中......".green);
-                } else {
-                  clearInterval(addP);
-                  console.log('"%s"模块创建成功'.green, env2);
-                }
-              });
-            }
-          });
-        }, 10);
+    if (env1 === 'p') {
+      var nowPath = process.cwd();
+      var filePath = __dirname;
+      new Filecopy(filePath + '/mod/p', nowPath + '/p');
+      var addP = setInterval(function() {
+        fs.exists(filePath + '/mod/p/demos', function(exists) {
+          if (exists) {
+            fs.rename(nowPath + '/p/demos', nowPath + '/p/' + env2, function(err) {
+              if (err) {
+                console.log("文件创建中......".green);
+              } else {
+                clearInterval(addP);
+                console.log('"%s"模块创建成功'.green, env2);
+              }
+            });
+          }
+        });
+      }, 10);
+      var answers = JSON.parse(fs.readFileSync(nowPath + '/config.json'));
+      var deleteN = setTimeout(function() {
+        var html = nowPath + '/page/index.html';
+        if (answers.style === 'css') {
+          fs.unlink(nowPath + '/p/' + env2 + '/index.less');
+          fs.unlink(nowPath + '/p/' + env2 + '/index.sass');
+        } else if (answers.style === 'less') {
+          // fs.unlink(nowPath + '/p/' + env2 + '/index.css');
+          fs.unlink(nowPath + '/p/' + env2 + '/index.sass');
+        } else {
+          fs.unlink(nowPath + '/p/' + env2 + '/index.less');
+          // fs.unlink(nowPath + '/p/' + env2 + '/index.css');
+        }
+      }, 100);
     } else if (env1 === 'c') {
       var nowPath = process.cwd();
       var filePath = __dirname;
@@ -113,6 +162,20 @@ program
           }
         });
       }, 10);
+      var answers = JSON.parse(fs.readFileSync(nowPath + '/config.json'));
+      var deleteN = setTimeout(function() {
+        var html = nowPath + '/page/index.html';
+        if (answers.style === 'css') {
+          fs.unlink(nowPath + '/c/' + env2 + '/index.less');
+          fs.unlink(nowPath + '/c/' + env2 + '/index.sass');
+        } else if (answers.style === 'less') {
+          // fs.unlink(nowPath + '/c/' + env2 + '/index.css');
+          fs.unlink(nowPath + '/c/' + env2 + '/index.sass');
+        } else {
+          fs.unlink(nowPath + '/c/' + env2 + '/index.less');
+          // fs.unlink(nowPath + '/c/' + env2 + '/index.css');
+        }
+      }, 100);
     } else {
       console.log('命令行参数不正确'.red);
     }
@@ -142,7 +205,7 @@ program
   .command('dev')
   .description('开启服务器')
   .action(function(env) {
-      new Http();
+    new Http();
   });
 
 program.parse(process.argv);
@@ -151,7 +214,7 @@ function readAllFile(root, reg) {
 
   var resultArr = [];
   var thisFn = arguments.callee;
-  if (fs.existsSync(root)) { //文件或文件夹存在
+  if (fs.existsSync(root)) { //文件或文件夹存在9
 
     var stat = fs.lstatSync(root); // 对于不存在的文件或文件夹，此函数会报错
 

@@ -7,9 +7,9 @@ Demo.prototype = {
     this.setColor();
   },
   setColor: function() {
-    new ModuleDemo({
+   /* new ModuleDemo({
       color: 'green'
-    });
+    });*/
   }
 };
 
