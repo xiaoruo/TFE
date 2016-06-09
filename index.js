@@ -189,12 +189,13 @@ program
       fs.exists('.eslintrc.js', function(exists) {
         if (exists === false) {
           init.initializeConfig();
+        } else {
+          var filesList = readAllFile(process.cwd());
+          for (var i = 0, len = filesList.length; i < len; i++) {
+            eslintCli.execute(filesList[i]);
+          }
         }
       });
-      var filesList = readAllFile(process.cwd());
-      for (var i = 0, len = filesList.length; i < len; i++) {
-        eslintCli.execute(filesList[i]);
-      }
     } else if (env === 'format') {
       format.getFormatter();
       console.log('代码格式化完成!'.green);
