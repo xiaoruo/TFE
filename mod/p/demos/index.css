@@ -1,3 +1,228 @@
+* {
+	padding: 0;
+	margin: 0;
+}
 html {
-	background-color: #6A3E3D;
+    background-color: #6A3E3D;
+}
+a {
+	text-decoration: none;
+}
+h1 {
+	color: #6BC4CA;
+    z-index: 2;
+    font-size: 2em;
+    margin: 55px 0 0 55px;
+    font-family: Arial;
+}
+h2 {
+	color: #fff;
+    z-index: 2;
+    font-size: 2em;
+    margin: 5px 0 0 55px;
+    font-family: Arial;
+}
+.demo {
+	position: fixed;
+	top: -100px;
+	z-index: 22;
+	width: 100%;
+	height: 100px;
+	background-color: #6BC4CA;
+	transition: top .5s ease-out;
+	-moz-transition: top .5s ease-out; /* Firefox 4 */
+	-webkit-transition: top .5s ease-out; /* Safari 和 Chrome */
+	-o-transition: top .5s ease-out; /* Opera */
+}
+.demo p {
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	margin-right: 20px;
+}
+.use p {
+	margin-top: 30px;
+	margin-left: 145px;
+	width: 70%;
+	line-height: 1.5;
+	margin-right: 20px;
+}
+p b {
+	border-radius: 50%;
+	background-color: #fff;
+	padding: 1px 9px;
+}
+p span {
+	padding: 10px;
+	font-size: 1.5em;
+	color: #fff;
+}
+.use {
+	position: fixed;
+	top: -200px;
+	z-index: 22;
+	width: 100%;
+	height: 200px;
+	background-color: #6BC4CA;
+	transition: all .5s ease-out;
+	-moz-transition: all .5s ease-out; /* Firefox 4 */
+	-webkit-transition: all .5s ease-out; /* Safari 和 Chrome */
+	-o-transition: all .5s ease-out; /* Opera */
+}
+.tip-one, .tip-two {
+	position: absolute;
+	bottom: -48px;
+	width: 128px;
+	height: 128px;
+	border-radius: 50%;
+	background-color: #6BC4CA;
+	line-height: 200px;
+	text-align: center;
+	font-weight: bold;
+	z-index: 2;
+}
+.tip-one a, .tip-two a {
+	color: #6A3E3D;
+}
+.tip-one {
+	right: 190px;
+}
+.tip-two {
+	right: 50px;
+}
+.demo:hover {
+	top: 0;
+	z-index: 222;
+}
+.use:hover {
+	top: 0;
+	z-index: 222;
+}
+.share {
+	position: fixed;
+    left: -348px;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    height: 108px;
+    margin: auto;
+    padding-right: 105px;
+    background: #fff;
+    color: #424251;
+    z-index: 9;
+    border-radius: 0 59px 59px 0;
+}
+.share a {
+	width: 65px;
+    height: 108px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    z-index: 10;
+    font-size: 18px;
+    line-height: 108px;
+    text-align: center;
+    background: transparent;
+    color: #424251;
+	transform: rotate(-90deg);
+	font-weight: bold;
+}
+.content {
+	box-shadow: 5px 5px 100px rgba(255,255,255,0.2),
+				-5px -5px 100px rgba(255,255,255,0.2),
+				5px -5px 100px rgba(255,255,255,0.2),
+				-5px 5px 100px rgba(255,255,255,0.2),
+				2px 2px 20px rgba(255,255,255,0.1) inset,
+				-2px -2px 20px rgba(255,255,255,0.1) inset,
+				-2px 2px 20px rgba(255,255,255,0.1) inset,
+				2px -2px 20px rgba(255,255,255,0.1) inset;
+	width: 50%;
+	padding: 10px;
+	margin: 100px auto;
+	color:#fff;
+	border-radius: 20px;
+	font-size: 2em;
+	font-family: Arial;
+	font-weight: bold;
+	line-height: 1.5;
+}
+.content a {
+	color: #6BC4CA;
+}
+.content a:hover {
+	text-decoration: underline;
+}
+.bottom {
+	position: fixed;
+	bottom: 30px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 90%;
+	border-top: 1px solid #fff;
+}
+.name-one {
+	display: block;
+	width: 169px;
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+    font-size: 1.8em;
+    font-family: Arial;
+    white-space: nowrap;
+    color: #fff;
+    font-weight: bold;
+}
+.name-two {
+	position: absolute;
+	right: 20px;
+	display: block;
+	margin-top: 20px;
+	float: left;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #6BC4CA;
+}
+
+.share-alert {
+	position: absolute;
+	top: -130px;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	border-radius: 3px;
+	margin: auto;
+	width: 400px;
+	padding: 20px 0;
+	/*height: 115px;*/
+	background-color: #fff;
+	transition: top 1s ease-out;
+	-moz-transition: top 1s ease-out; /* Firefox 4 */
+	-webkit-transition: top 1s ease-out; /* Safari 和 Chrome */
+	-o-transition: top 1s ease-out; /* Opera */
+}
+.share-alert h3 {
+	font-size: 1em;
+	color: #6BC4CA;
+	width: 100%;
+	text-align: center;
+}
+.share-alert textarea {
+	margin-left: 25px;
+	margin-top: 20px;
+	width: 70%;
+	border: 1px solid #6BC4CA;
+	color: #6A3E3D;
+	padding: 5px;
+	resize: none;
+	overflow: hidden;
+}
+.share-alert a {
+	position: relative;
+	bottom: 17px;
+	padding: 5px 10px;
+	background-color: #6BC4CA;
+	border-radius: 3px;
+	color: #fff;
 }
